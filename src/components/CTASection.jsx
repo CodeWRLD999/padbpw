@@ -13,6 +13,7 @@ export default function CTASection() {
     mobile: '',
   });
   const [errors, setErrors] = useState({});
+  const [submitted, setSubmitted] = useState(false);
 
   const handleConsultation = () => {
     setIsModalOpen(true);
@@ -36,16 +37,45 @@ export default function CTASection() {
     return Object.keys(tempErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      // Placeholder for email submission (we'll configure this next)
-      console.log('Form submitted:', formData);
-      alert('Form submitted! Check console for details. We’ll set up email next.');
-      setIsModalOpen(false);
-      setFormData({ name: '', callTime: '', service: '', businessSector: '', email: '', mobile: '' });
+      try {
+        const response = await fetch('/api/sendConsultationEmail', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        });
+        const data = await response.json();
+        if (response.ok) {
+          setSubmitted(true);
+          setIsModalOpen(false);
+        } else {
+          alert(data.message || 'Failed to send consultation request');
+        }
+      } catch (err) {
+        alert('An error occurred. Please try again later.');
+        console.error('Submission error:', err);
+      }
     }
   };
+
+  if (submitted) {
+    return (
+      <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-[#FF4040] to-[#4A2C2C]">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">Thank You!</h3>
+            <p className="text-lg sm:text-xl text-white/90">We'll contact you soon to confirm your consultation.</p>
+          </motion.div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-[#FF4040] to-[#4A2C2C]">
