@@ -7,12 +7,12 @@ export default function WorkflowsSection() {
     {
       title: 'Peak LeadFlow Automation Suite',
       description: 'Complete automation system that captures, nurtures, and converts leads while you sleep. Built with cutting-edge AI to handle everything from initial contact to appointment booking.',
-      videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+      videoUrl: 'https://www.youtube.com/embed/H1cGEdb36E0?si=m8msRfYvEczXV59n',
     },
     {
       title: 'Peak Lead Agent',
       description: 'Intelligent AI assistant that engages prospects 24/7, qualifies leads instantly, and books appointments automatically. Your digital sales team that never takes a break.',
-      videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+      videoUrl: 'https://www.youtube.com/embed/coiK5_4z8cc?si=dn3Cyw8xE5iah-k4',
     },
   ];
 

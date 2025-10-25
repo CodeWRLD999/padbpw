@@ -38,7 +38,7 @@ export default function CaseStudiesSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="bg-gradient-to-br from-black to-dark-brown p-6 sm:p-8 md:p-10 rounded-xl hover:shadow-xl transition-all duration-500 group hover:-translate-y-2"
+              className="bg-gradient-to-br from-[#1A1A1A] to-[#FF4040] p-6 sm:p-8 md:p-10 rounded-xl hover:shadow-xl transition-all duration-500 group hover:-translate-y-2"
             >
               <div className="mb-4 sm:mb-6">
                 <div className="inline-flex p-3 sm:p-4 rounded-lg bg-red-500/20">
