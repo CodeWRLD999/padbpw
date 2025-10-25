@@ -1,6 +1,6 @@
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
   }
@@ -14,10 +14,18 @@ module.exports = async function handler(req, res) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: process.env.GMAIL_USER, // e.g., rudeacus@gmail.com
-      pass: process.env.GMAIL_APP_PASSWORD, // App-specific password
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_APP_PASSWORD,
     },
   });
+
+  try {
+    await transporter.verify();
+    console.log('Transporter is ready');
+  } catch (verifyError) {
+    console.error('Transporter verification failed:', verifyError);
+    return res.status(500).json({ message: 'Email service configuration error' });
+  }
 
   const emailContent = `
     New Consultation Request for Peak Ascension Digital!
@@ -37,8 +45,8 @@ module.exports = async function handler(req, res) {
   `;
 
   const mailOptions = {
-    from: process.env.GMAIL_USER, // Sender (rudeacus@gmail.com)
-    to: 'CalimoX@peakascension.dev, rudeacus@gmail.com', // Both recipients
+    from: process.env.GMAIL_USER,
+    to: 'CalimoX@peakascensiondigital.dev, rudeacus@gmail.com',
     subject: 'New Consultation Request from Peak Ascension Digital',
     text: emailContent,
     html: `
@@ -56,6 +64,7 @@ module.exports = async function handler(req, res) {
 
   try {
     await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully');
     return res.status(200).json({ message: 'Consultation email sent successfully' });
   } catch (error) {
     console.error('Error sending email:', error);
