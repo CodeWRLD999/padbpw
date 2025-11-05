@@ -6,13 +6,13 @@ export default function CaseStudiesSection() {
   const caseStudies = [
     {
       icon: Award,
-      title: 'Glisten Hair and Aesthetics Transformation',
+      title: 'Hair and Aesthetics Transformation',
       summary: 'Elevated a local salon to market leadership with SEO, ads, and automation.',
       results: ['300% increase in online bookings', 'Top 3 Google ranking in 6 months', 'Automated appointment system saving 15 hours/week'],
     },
     {
       icon: TrendingUp,
-      title: 'Nick West Electrical Turnaround',
+      title: 'Local Electricians Company Turnaround',
       summary: 'Helped a tradesperson rise to the top of local searches with targeted strategies.',
       results: ['450% growth in qualified leads', '#1 ranking for key local searches', 'Consistent 5-star review flow'],
     },
